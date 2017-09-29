@@ -12,6 +12,19 @@ import SpriteKit
 
 class GameViewController: UIViewController {
     
+    
+    lazy var interstitialObj : GDTMobInterstitial = {
+        let interstitial = GDTMobInterstitial(appkey: "1106453704", placementId: "4080820684762970")
+        interstitial?.delegate = self
+        
+        return interstitial!
+    }()
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        
+    }
     override func viewDidLoad() {
         
         super.viewDidLoad()
@@ -19,9 +32,9 @@ class GameViewController: UIViewController {
         let scene = GameBeginScene(size: self.view.frame.size)
         
         let skView = self.view as! SKView
-        skView.showsFPS = true
-        skView.showsNodeCount = true
-        
+//        skView.showsFPS = true
+//        skView.showsNodeCount = true
+//
         skView.ignoresSiblingOrder = true
         
         scene.scaleMode = .aspectFill
@@ -29,6 +42,17 @@ class GameViewController: UIViewController {
         skView.presentScene(scene)
         
         NotificationCenter.default.addObserver(self, selector: #selector(GameViewController.share), name: NSNotification.Name(rawValue: "share"), object: nil)
+        let count = UserDefaults.standard.integer(forKey: "kLaunchCount")
+    
+        interstitialObj.loadAd()
+        
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now()+1) {
+            if count % 2 == 0 {
+                
+                self.interstitialObj.present(fromRootViewController: self)
+                
+            }
+        }
         
     }
     
@@ -73,3 +97,12 @@ extension GameViewController: GameBaseSceneDelegate {
         }
     }
 }
+
+
+extension GameViewController : GDTMobInterstitialDelegate {
+    
+    func interstitialSuccess(toLoadAd interstitial: GDTMobInterstitial!) {
+        print("预加载成功")
+    }
+}
+

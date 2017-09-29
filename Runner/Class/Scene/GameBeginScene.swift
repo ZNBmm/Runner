@@ -17,7 +17,7 @@ class GameBeginScene: GameBaseScene {
     lazy var back : ScrollingNode = ScrollingNode.scrollingNodeWithImageNamed(name: "back", inContainer: kScreenWidth) as! ScrollingNode
     lazy var tapActionSound = SKAction.playSoundFileNamed("tap.wav", waitForCompletion: false)
     lazy var  tipLabel = UILabel(frame: CGRect(x: kScreenWidth*0.5-200, y: 50, width: 400, height:150))
-    
+    var gameLevelNode : SKLabelNode = SKLabelNode(text: "DIFFICULTY : Easy")
     /// bgmPlayer
     var bgmPlayer : AVAudioPlayer?
     override func didMove(to view: SKView) {
@@ -48,6 +48,10 @@ class GameBeginScene: GameBaseScene {
         
         if node.name == "begin" {
             self.changeToGame()
+            self.run(tapActionSound)
+        }else if node.name == "gameLevel" {
+            
+            changeToGameLevel()
             self.run(tapActionSound)
         }
     }
@@ -87,6 +91,15 @@ extension GameBeginScene {
         tipLabel.layer.masksToBounds = true
         self.view?.addSubview(tipLabel)
         
+        
+        gameLevelNode.position = CGPoint(x: self.size.width*0.5, y: floor.position.y+floor.size.height+40)
+        gameLevelNode.fontName = "Chalkduster"
+        gameLevelNode.fontSize = 20
+        gameLevelNode.name = "gameLevel"
+        gameLevelNode.zPosition = 40
+        gameLevelNode.fontColor = SKColor.orange
+        
+        self.addChild(gameLevelNode)
     }
     
     func setUpBegin()   {
@@ -112,9 +125,21 @@ extension GameBeginScene {
         bgmPlayer?.stop()
         bgmPlayer = nil
         let gameBegin = GameSceneA(size: self.size)
-        
+        gameBegin.gameLevel = gameLevelNode.text
         tipLabel.alpha = 0
         let reveal = SKTransition.reveal(with: .up, duration: 1.0)
+        
+        self.scene?.view?.presentScene(gameBegin, transition: reveal)
+    }
+    
+    func changeToGameLevel()  {
+        
+        bgmPlayer?.stop()
+        bgmPlayer = nil
+        let gameBegin = GameLevelChooseScene(size: self.size)
+        
+        tipLabel.alpha = 0
+        let reveal = SKTransition.reveal(with: .right, duration: 1.0)
         
         self.scene?.view?.presentScene(gameBegin, transition: reveal)
     }

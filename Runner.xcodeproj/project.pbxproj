@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		040284731F7DD9AE00832A3A /* GameLevelChooseScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040284721F7DD9AE00832A3A /* GameLevelChooseScene.swift */; };
+		0402847D1F7DFC0100832A3A /* libGDTMobSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 040284751F7DF7D100832A3A /* libGDTMobSDK.a */; };
 		041AB9A11F6F683E00C1478F /* tap.wav in Resources */ = {isa = PBXBuildFile; fileRef = 041AB9A01F6F683E00C1478F /* tap.wav */; };
 		042E38CE1F6DF41F002EAE63 /* heiqiu.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 042E38CD1F6DF41F002EAE63 /* heiqiu.atlas */; };
 		042E38D41F6E0A50002EAE63 /* bianbian.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 042E38D31F6E0A50002EAE63 /* bianbian.atlas */; };
@@ -45,6 +47,15 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		040284721F7DD9AE00832A3A /* GameLevelChooseScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameLevelChooseScene.swift; sourceTree = "<group>"; };
+		040284751F7DF7D100832A3A /* libGDTMobSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libGDTMobSDK.a; sourceTree = "<group>"; };
+		040284761F7DF7D100832A3A /* GDTNativeAd.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GDTNativeAd.h; sourceTree = "<group>"; };
+		040284771F7DF7D100832A3A /* GDTMobBannerView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GDTMobBannerView.h; sourceTree = "<group>"; };
+		040284781F7DF7D100832A3A /* GDTNativeExpressAd.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GDTNativeExpressAd.h; sourceTree = "<group>"; };
+		040284791F7DF7D100832A3A /* GDTTrack.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GDTTrack.h; sourceTree = "<group>"; };
+		0402847A1F7DF7D100832A3A /* GDTMobInterstitial.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GDTMobInterstitial.h; sourceTree = "<group>"; };
+		0402847B1F7DF7D200832A3A /* GDTNativeExpressAdView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GDTNativeExpressAdView.h; sourceTree = "<group>"; };
+		0402847C1F7DF7D200832A3A /* GDTSplashAd.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GDTSplashAd.h; sourceTree = "<group>"; };
 		041AB9A01F6F683E00C1478F /* tap.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = tap.wav; sourceTree = "<group>"; };
 		042E38CD1F6DF41F002EAE63 /* heiqiu.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = heiqiu.atlas; sourceTree = "<group>"; };
 		042E38D31F6E0A50002EAE63 /* bianbian.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = bianbian.atlas; sourceTree = "<group>"; };
@@ -94,15 +105,32 @@
 			buildActionMask = 2147483647;
 			files = (
 				585EED757FD2CC6437E74E6F /* Pods_Runner.framework in Frameworks */,
+				0402847D1F7DFC0100832A3A /* libGDTMobSDK.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		040284741F7DF7B300832A3A /* Lib */ = {
+			isa = PBXGroup;
+			children = (
+				040284771F7DF7D100832A3A /* GDTMobBannerView.h */,
+				0402847A1F7DF7D100832A3A /* GDTMobInterstitial.h */,
+				040284761F7DF7D100832A3A /* GDTNativeAd.h */,
+				040284781F7DF7D100832A3A /* GDTNativeExpressAd.h */,
+				0402847B1F7DF7D200832A3A /* GDTNativeExpressAdView.h */,
+				0402847C1F7DF7D200832A3A /* GDTSplashAd.h */,
+				040284791F7DF7D100832A3A /* GDTTrack.h */,
+				040284751F7DF7D100832A3A /* libGDTMobSDK.a */,
+			);
+			path = Lib;
+			sourceTree = "<group>";
+		};
 		042E38D71F6ED4D5002EAE63 /* Class */ = {
 			isa = PBXGroup;
 			children = (
+				040284741F7DF7B300832A3A /* Lib */,
 				042E38D81F6ED4D5002EAE63 /* Controller */,
 				042E38DA1F6ED4D5002EAE63 /* Node */,
 				042E38E31F6ED4D5002EAE63 /* Scene */,
@@ -143,6 +171,7 @@
 				042E38E61F6ED4D5002EAE63 /* GameScene.swift */,
 				042E38E71F6ED4D5002EAE63 /* GameSceneA.swift */,
 				04F201891F73DFF700B0C2BF /* GameBaseScene.swift */,
+				040284721F7DD9AE00832A3A /* GameLevelChooseScene.swift */,
 			);
 			path = Scene;
 			sourceTree = "<group>";
@@ -378,6 +407,7 @@
 				04F201861F73CCE000B0C2BF /* EmitterNode.swift in Sources */,
 				042E38F11F6ED4D5002EAE63 /* GameBeginScene.swift in Sources */,
 				04F201881F73CDDE00B0C2BF /* ZhuYeView.swift in Sources */,
+				040284731F7DD9AE00832A3A /* GameLevelChooseScene.swift in Sources */,
 				042E38F31F6ED4D5002EAE63 /* GameScene.swift in Sources */,
 				042E38E91F6ED4D5002EAE63 /* BianBian.swift in Sources */,
 				042E38EE1F6ED4D5002EAE63 /* PlatformFactory.swift in Sources */,
@@ -512,6 +542,7 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Pods/UMengAnalytics/umsdk_IOS_analyics_idfa_v4.2.4/UMMobClick.framework/Versions/A",
+					"$(PROJECT_DIR)/Runner/Class/Lib",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.znb.runner;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -538,6 +569,7 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Pods/UMengAnalytics/umsdk_IOS_analyics_idfa_v4.2.4/UMMobClick.framework/Versions/A",
+					"$(PROJECT_DIR)/Runner/Class/Lib",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.znb.runner;
 				PRODUCT_NAME = "$(TARGET_NAME)";

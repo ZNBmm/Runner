@@ -4,3 +4,4 @@
 
 
 #import <UMMobClick/MobClick.h>
+#import "GDTMobInterstitial.h"

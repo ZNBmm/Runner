@@ -27,6 +27,9 @@ class GameEndScene: GameBaseScene {
         return node
     }()
     
+    var gameLevel:String?
+    
+    
     override func didMove(to view: SKView) {
         super.didMove(to: view)
         self.backgroundColor = SKColor(red: 112/255, green: 197/255, blue: 205/255, alpha: 1)
@@ -102,6 +105,7 @@ extension GameEndScene {
 
     func changeToGame()  {
         let gameBegin = GameSceneA(size: self.size)
+        gameBegin.gameLevel = gameLevel
         self.run(tapActionSound)
         let reveal = SKTransition.reveal(with: .up, duration: 1.0)
         
@@ -111,6 +115,7 @@ extension GameEndScene {
     
     func gameCancel(){
         let gameBegin = GameBeginScene(size: self.size)
+        gameBegin.gameLevelNode.text = gameLevel
         self.run(tapActionSound)
         let reveal = SKTransition.reveal(with: .up, duration: 1.0)
         
@@ -166,7 +171,7 @@ extension GameEndScene {
         
         let resultLabel = SKLabelNode(fontNamed: "Avenir-Black")
         
-        resultLabel.text = "Cur Score:\(score)    Best Score:\(bestScore)"
+        resultLabel.text = "Cur Score:\(score)   Best Score:\(bestScore)"
         resultLabel.fontSize = 20
         resultLabel.fontColor = SKColor.orange
         resultLabel.position = CGPoint(x: self.size.width*0.5, y: self.size.height*0.87)

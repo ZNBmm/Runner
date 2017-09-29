@@ -32,13 +32,31 @@ class GameSceneA: GameBaseScene {
     
     var feibiaoActionSound : SKAction = SKAction.playSoundFileNamed("pew-pew-lei.caf", waitForCompletion: false)
     
-    
+    var gameLevel:String?
     
     var isLose:Bool = false
     /// bgmPlayer
     var bgmPlayer : AVAudioPlayer?
     
-    
+    let runnerPosition : CGPoint = {
+        if kScreenWidth == 812 && kScreenHeight == 375 {
+            print("iphoneX")
+            return CGPoint(x: 144, y: 200)
+        }else {
+            print("iphone")
+            return CGPoint(x: 100, y: 200)
+        }
+    }()
+    let margin :CGFloat = {
+        if kScreenWidth == 812 && kScreenHeight == 375 {
+            print("iphoneX")
+            return 44
+        }else {
+            print("iphone")
+            return 0
+        }
+        
+    }()
     override func didMove(to view: SKView) {
         super.didMove(to: view)
         
@@ -56,11 +74,25 @@ class GameSceneA: GameBaseScene {
         self.physicsWorld.contactDelegate = self
         // 配置UI
         configUI()
-       
-        let monsterTime = arc4random()%1+1
-        let bianbianTime = arc4random()%3+3
-        configAction(monsterWaitTime: TimeInterval(monsterTime), bianbianWaitTime: TimeInterval(bianbianTime))
-       
+        
+        
+        
+        if (gameLevel?.contains("Easy"))! {
+            let monsterTime = arc4random()%1+1
+            configAction(monsterWaitTime: TimeInterval(monsterTime))
+            
+        }else if (gameLevel?.contains("Normal"))! {
+            let monsterTime = arc4random()%2+2
+            let bianbianTime = 3
+            configAction(monsterWaitTime: TimeInterval(monsterTime), bianbianWaitTime: TimeInterval(bianbianTime))
+            
+        }else if (gameLevel?.contains("Crazy"))! {
+            
+            let monsterTime = 1
+            let bianbianTime = 2
+            configAction(monsterWaitTime: TimeInterval(monsterTime), bianbianWaitTime: TimeInterval(bianbianTime))
+        }
+        //print(gameLevel ?? "D Easy")
         
     }
     
@@ -100,7 +132,7 @@ class GameSceneA: GameBaseScene {
         back.update(currentTime: currentTime)
         
         //如果小人出现了位置偏差，就逐渐恢复
-        if runner.position.x < 100 {
+        if runner.position.x < runnerPosition.x {
             let x = runner.position.x + 1
             runner.position = CGPoint(x: x, y: runner.position.y)
         }
@@ -117,7 +149,7 @@ extension GameSceneA {
     
     func configUI() {
         
-        runner.position = CGPoint(x: 100, y: 200)
+        runner.position = runnerPosition
         
         self.addChild(runner)
         
@@ -138,7 +170,7 @@ extension GameSceneA {
         
         self.addChild(jump)
         jump.anchorPoint = .zero
-        jump.position = CGPoint(x: 10, y: 10)
+        jump.position = CGPoint(x: 10 + margin, y: 10)
         jump.name = "jump"
         jump.zPosition = 40
         
@@ -357,6 +389,7 @@ extension GameSceneA {
         
         let gameEndscene = GameEndScene(size: self.size)
         gameEndscene.loseReasonStr = reason
+        gameEndscene.gameLevel = gameLevel
         gameEndscene.score = score
         let reveal = SKTransition.reveal(with: .up, duration: 1.0)
         self.scene?.view?.presentScene(gameEndscene, transition: reveal)
@@ -367,10 +400,7 @@ extension GameSceneA {
 extension GameSceneA {
 
     func configAction(monsterWaitTime:TimeInterval,bianbianWaitTime:TimeInterval)  {
-        
-        
-        
-        print("+++++++++++\(score)+++++++++")
+    
         
         let actionAddMonster = SKAction.run {
             self.addMonster()
@@ -386,6 +416,16 @@ extension GameSceneA {
             self.addBianBian()
         }
         self.run(SKAction.repeatForever(SKAction.sequence([actionAddBianbian,actionWait1])))
+    }
+    
+    func configAction(monsterWaitTime:TimeInterval)  {
+        
+        let actionAddMonster = SKAction.run {
+            self.addMonster()
+        }
+        
+        let actionWait = SKAction.wait(forDuration: monsterWaitTime)
+    self.run(SKAction.repeatForever(SKAction.sequence([actionAddMonster,actionWait])))
     }
 }
 
